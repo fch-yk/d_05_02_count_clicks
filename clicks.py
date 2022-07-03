@@ -16,7 +16,7 @@ def shorten_link(token, link):
 def main():
     load_dotenv()
     token = os.getenv('bitly_token')
-    link = 'https://www.youtube.com/'
+    link = input('Input link: ')
     print('Битлинк', shorten_link(token, link))
 
 
