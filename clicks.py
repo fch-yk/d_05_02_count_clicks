@@ -1,4 +1,5 @@
 import os
+import sys
 
 import requests
 from dotenv import load_dotenv
@@ -17,7 +18,13 @@ def main():
     load_dotenv()
     token = os.getenv('bitly_token')
     link = input('Input link: ')
-    print('Битлинк', shorten_link(token, link))
+    try:
+        bitlink = shorten_link(token, link)
+    except requests.exceptions.HTTPError as error:
+        print(f'Incorrect link. Error: {error}', file=sys.stderr)
+        sys.exit()
+
+    print('Битлинк', bitlink)
 
 
 if __name__ == '__main__':
