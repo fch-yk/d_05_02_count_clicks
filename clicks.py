@@ -54,7 +54,6 @@ def main():
                 f'Anable to count total clicks. Error: {error}',
                 file=sys.stderr
             )
-            sys.exit()
         else:
             print('Total clicks: ', total_clicks)
     else:
@@ -62,7 +61,6 @@ def main():
             bitlink = shorten_link(token, user_input)
         except requests.exceptions.HTTPError as error:
             print(f'Incorrect link. Error: {error}', file=sys.stderr)
-            sys.exit()
         else:
             print('Bitlink: ', bitlink)
 
