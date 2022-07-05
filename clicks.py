@@ -40,12 +40,8 @@ def main():
     load_dotenv()
     token = os.getenv('bitly_token')
     user_input = input('Input link: ')
-    try:
-        link_is_bitlink = is_bitlink(user_input, token)
-    except requests.exceptions.HTTPError:
-        link_is_bitlink = False
 
-    if link_is_bitlink:
+    if is_bitlink(user_input, token):
         try:
             total_clicks = count_clicks(token, user_input)
         except requests.exceptions.HTTPError as error:
