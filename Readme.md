@@ -18,6 +18,16 @@ Python 3.10 or higher required.
 pip install -r requirements.txt
 ```
 
+- set an environmental variable `bitly_token`:
+create .env file in the root folder of the project and fill it with:
+
+```bash
+bitly_token='xxx'
+```
+
+where 'xxx' is your access token that you can get [here](https://dev.bitly.com/).
+The access token provides the possibility to use [The Bitly API](https://dev.bitly.com/).
+
 ## Running script
 
 - Run:
