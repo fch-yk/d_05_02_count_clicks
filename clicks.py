@@ -38,7 +38,7 @@ def shorten_link(token, link):
 
 def main():
     load_dotenv()
-    token = os.getenv('bitly_token')
+    token = os.getenv('BITLY_TOKEN')
     user_input = input('Input link: ')
 
     if is_bitlink(user_input, token):
