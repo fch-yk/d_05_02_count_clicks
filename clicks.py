@@ -13,7 +13,6 @@ def is_bitlink(link, token):
     url = url.format(bitlink=bitlink)
     headers = {'Authorization': f'Bearer {token}'}
     response = requests.get(url, headers=headers)
-    response.raise_for_status()
     return response.ok
 
 
