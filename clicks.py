@@ -1,9 +1,25 @@
+import argparse
 import os
 import sys
 from urllib.parse import urlparse
 
 import requests
 from dotenv import load_dotenv
+
+
+def create_parser():
+    description = '''
+    The program uses The Bitly API for
+    transforming a long link into a short one
+    or getting total clicks of a short link
+    '''
+    parser = argparse.ArgumentParser(description=description)
+
+    parser.add_argument('link',
+                        metavar='<link>',
+                        help='long or short link')
+
+    return parser
 
 
 def is_bitlink(link, token):
@@ -39,11 +55,12 @@ def shorten_link(token, link):
 def main():
     load_dotenv()
     token = os.getenv('BITLY_TOKEN')
-    user_input = input('Input link: ')
+    parser = create_parser()
+    namespace = parser.parse_args()
 
-    if is_bitlink(user_input, token):
+    if is_bitlink(namespace.link, token):
         try:
-            total_clicks = count_clicks(token, user_input)
+            total_clicks = count_clicks(token, namespace.link)
         except requests.exceptions.HTTPError as error:
             print(
                 f'Anable to count total clicks. Error: {error}',
@@ -53,7 +70,7 @@ def main():
             print('Total clicks: ', total_clicks)
     else:
         try:
-            bitlink = shorten_link(token, user_input)
+            bitlink = shorten_link(token, namespace.link)
         except requests.exceptions.HTTPError as error:
             print(f'Incorrect link. Error: {error}', file=sys.stderr)
         else:
