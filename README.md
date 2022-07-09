@@ -12,20 +12,26 @@ Python 3.10 or higher required.
 ## Installing
 
 - Download the project files
-- Run:
+- It is recommended to use [venv](https://docs.python.org/3/library/venv.html?highlight=venv#module-venv) for project isolation
+- Set up packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-- set an environmental variable `BITLY_TOKEN`:
-create .env file in the root folder of the project and fill it with:
+- Set up `dotenv` [command line interface](https://github.com/theskumar/python-dotenv#command-line-interface):
 
 ```bash
-BITLY_TOKEN='xxx'
+pip install "python-dotenv[cli]"
 ```
 
-where 'xxx' is your access token that you can get [here](https://dev.bitly.com/).
+- Set up an environmental variable `BITLY_TOKEN`:
+
+```bash
+dotenv set BITLY_TOKEN token
+```
+
+where `token` is your access token that you can get [here](https://dev.bitly.com/).
 The access token provides the possibility to use [The Bitly API](https://dev.bitly.com/).
 
 ## Running script
@@ -33,10 +39,11 @@ The access token provides the possibility to use [The Bitly API](https://dev.bit
 - Run:
 
 ```bash
-python clicks.py
+python clicks.py link
 ```
 
-You will be prompted to input a link.
+where `link` is a web link (short or long).
+
 The output for a long link (e.g., [google.com](https://www.google.com/)) is a short link.
 The output for a short link (e.g., [bit.ly/3ny2HtI](https://bit.ly/3ny2HtI)) is total clicks.
 
