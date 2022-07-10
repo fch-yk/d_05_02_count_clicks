@@ -15,9 +15,11 @@ def create_parser():
     '''
     parser = argparse.ArgumentParser(description=description)
 
-    parser.add_argument('link',
-                        metavar='<link>',
-                        help='long or short link')
+    parser.add_argument(
+        'link',
+        metavar='<link>',
+        help='long or short link'
+    )
 
     return parser
 
