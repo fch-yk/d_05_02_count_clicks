@@ -56,11 +56,11 @@ def main():
     load_dotenv()
     token = os.getenv('BITLY_TOKEN')
     parser = create_parser()
-    namespace = parser.parse_args()
+    link = parser.parse_args().link
 
-    if is_bitlink(namespace.link, token):
+    if is_bitlink(link, token):
         try:
-            total_clicks = count_clicks(token, namespace.link)
+            total_clicks = count_clicks(token, link)
         except requests.exceptions.HTTPError as error:
             print(
                 f'Anable to count total clicks. Error: {error}',
@@ -70,7 +70,7 @@ def main():
             print('Total clicks: ', total_clicks)
     else:
         try:
-            bitlink = shorten_link(token, namespace.link)
+            bitlink = shorten_link(token, link)
         except requests.exceptions.HTTPError as error:
             print(f'Incorrect link. Error: {error}', file=sys.stderr)
         else:
