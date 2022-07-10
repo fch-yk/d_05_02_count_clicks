@@ -59,22 +59,16 @@ def main():
     link = parser.parse_args().link
 
     if is_bitlink(link, token):
-        try:
-            total_clicks = count_clicks(token, link)
-        except requests.exceptions.HTTPError as error:
-            print(
-                f'Anable to count total clicks. Error: {error}',
-                file=sys.stderr
-            )
-        else:
-            print('Total clicks: ', total_clicks)
+        link_handler = count_clicks
+        print('Total clicks: ', end='')
     else:
-        try:
-            bitlink = shorten_link(token, link)
-        except requests.exceptions.HTTPError as error:
-            print(f'Incorrect link. Error: {error}', file=sys.stderr)
-        else:
-            print('Bitlink: ', bitlink)
+        link_handler = shorten_link
+        print('Bitlink: ', end='')
+
+    try:
+        print(link_handler(token, link))
+    except requests.exceptions.HTTPError as error:
+        print(f'Incorrect link "{link}". Error: {error}', file=sys.stderr)
 
 
 if __name__ == '__main__':
